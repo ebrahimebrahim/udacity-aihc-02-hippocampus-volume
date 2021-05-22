@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\setlength\parskip{1em}
+\setlength\parindent{0em}
+
+\begin{document}
+
+\section*{HippoVolume.AI - Validation Plan}
+
+HippoVolume.AI is a piece of medical software centered on a deep neural network model that is trained
+to segment MRIs for hippocampi.
+The software uses the segmentation to
+compute hippocampus volume and generates a report that can be integrated into a suitable clinician's workflow.
+
+\subsection*{Intended Use}
+
+The intended use of this software is to assist a radiologist in measuring hippocampus volume while reading a brain MRI.
+It must be paired with out from the tool HippoCrop in order to function properly.
+
+Indications for use:
+One promising application of this software is in the diagnosis and progression-tracking of Alzheimer's disorder.
+Hippocampus volume has been shown to be useful for this; see \cite{franko}, \cite{jack}, and \cite{moon}.
+
+\subsection*{Training Data}
+
+The training data was obtained from a repository at Vanderbilt University Medical Center.
+Patients were recruited from the community in and surrounding Nashville, TN.
+Some patients were healthy and some had a psychotic disorder, but all were free
+from significant neurological illnesses or head injuries.
+See \cite{data_paper} for more details.
+
+Even though the training images were all obtained via the same medical imaging device (a Philips Achieva scanner),
+we would like to claim that our software functions at acceptable levels on output from any brain MRI as long as there is sufficient contrast
+to make out the relevant structures.
+
+\textit{For later validating the model's performance, we will request more brain MRIs from a variety of devices.
+We will request that the images be from patients who do not have any significant neurological illnesses or head injury,
+and we will request that the contrast be sufficient to make out the hippocampi. We plan to use the HippoCrop tool to generate
+input for our model.}
+
+\subsection*{Ground Truth}
+ 
+Ground truth for training was obtained by manual tracing of the posterior and anterior parts of the hippocampus.
+The tracing was done following the protocol found in \cite{gt_protocol}.
+
+\textit{
+For later validating the model's performance, we will 
+request ground truth labels manually traced by qualified specialists according to the protocol found in \cite{gt_protocol}.
+}
+
+\subsection*{Model Performance}
+
+The current model's perforance was assessed using a Dice coefficient. We obtained a mean Dice coefficient of 0.9 on validation data
+with the Dice coefficient not going below 0.8.
+
+\textit{
+For later validating the model's performance, we will
+\begin{itemize}
+\item apply HippoCrop to the MRI data obtained as described above,
+\item generate predicted segmentations by applying our model,
+\item and compute the Dice coefficient comparing the predicted segmentation to the ground truth obtained as described above.
+\end{itemize}
+If the mean dice coefficient is above 0.8 then the software can be considered to be performing acceptably.
+}
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
